@@ -5,16 +5,18 @@
   "author": "Morton358 <vovankovalchuk358@gmail.com>",
   "license": "MIT",
   "scripts": {
-      "start": "babel-node --presets env app.js"
+    "start": "babel-node --presets env app.js"
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "dotenv": "^5.0.1",
     "es6-promise": "^4.2.4",
     "twitter": "^1.7.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.6.2",
+    "twit": "^2.2.9"
   }
 }

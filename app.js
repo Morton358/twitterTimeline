@@ -1,7 +1,7 @@
-const Twitter = require('twitter');
+const Twit = require('twit');
+require('dotenv').config()
 
-import * as config from './config';
-import axios from './axios-instance'
+// import axios from './axios-instance'
 
 const params = { screen_name: 'voloyev', count: 3 };
 
@@ -13,9 +13,11 @@ const params = { screen_name: 'voloyev', count: 3 };
 //         .replace(/\)/g, '%29')
 //         .replace(/\*/g, '%2A');
 // }
-
+// BASE64_BEARER_TOKEN_CREDENTIALS
 // const CONSUMER_KEY_RFC1738 = rawurlencode(config.CONSUMER_KEY);
 // const CONSUMER_SECRET_RFC1738 = rawurlencode(config.CONSUMER_SECRET);
+// const ACCESS_TOKEN_KEY_RFC1738 = rawurlencode(config.ACCESS_TOKEN_KEY);
+// const ACCESS_TOKEN_SECRET_RFC1738 = rawurlencode(config.ACCESS_TOKEN_SECRET);
 //
 // const BEARER_TOKEN_CREDENTIALS =
 //     CONSUMER_KEY_RFC1738 + ':' + CONSUMER_SECRET_RFC1738;
@@ -23,17 +25,12 @@ const params = { screen_name: 'voloyev', count: 3 };
 //     BEARER_TOKEN_CREDENTIALS
 // ).toString('base64');
 
-
-const TWITTER_CONSUMER_KEY = config.CONSUMER_KEY;
-const TWITTER_CONSUMER_SECRET = config.CONSUMER_SECRET;
-const TWITTER_ACCESS_TOKEN_KEY = config.ACCESS_TOKEN_KEY;
-const TWITTER_ACCESS_TOKEN_SECRET = config.ACCESS_TOKEN_SECRET;
-
-const client = new Twitter({
+const client = new Twit({
     consumer_key: process.env.TWITTER_CONSUMER_KEY,
     consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
-    access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
-    access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
+    access_token: process.env.TWITTER_ACCESS_TOKEN_KEY,
+    access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
+    timeout_ms: 60*1000
 });
 
 client.get('statuses/user_timeline', params, (error, tweets, response) => {
