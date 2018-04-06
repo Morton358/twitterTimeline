@@ -1,5 +1,5 @@
 const Twit = require('twit');
-require('dotenv').config()
+require('dotenv').config();
 
 // import axios from './axios-instance'
 
@@ -30,17 +30,17 @@ const client = new Twit({
     consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
     access_token: process.env.TWITTER_ACCESS_TOKEN_KEY,
     access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
-    timeout_ms: 60*1000
+    timeout_ms: 60 * 1000
 });
 
-client.get('statuses/user_timeline', params, (error, tweets, response) => {
-    try {
-        console.log(tweets);
-        console.log(response);
-    } catch (error) {
-        console.log(error);
-    }
-});
+client
+    .get('statuses/user_timeline', params)
+    .catch(error => {
+        console.log('caught error', error.stack);
+    })
+    .then(result => {
+        console.log('data', result.data);
+    });
 
 // axios.defaults.headers.common[
 //     'Authorization'
