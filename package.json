@@ -5,10 +5,11 @@
   "author": "Morton358 <vovankovalchuk358@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "babel-node --presets env app.js",
+    "babel-node": "babel-node --presets env app.js",
     "client": "cd client && yarn start",
-    "server": "nodemon app.js",
-    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
+    "server": "nodemon --exec yarn babel-node -- ./app.js",
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "build": "babel src -d dist"
   },
   "dependencies": {
     "axios": "^0.18.0",
