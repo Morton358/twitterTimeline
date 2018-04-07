@@ -1,10 +1,12 @@
+const express = require('express');
 const Twit = require('twit');
 require('dotenv').config();
+const app = express();
 
-// import axios from './axios-instance'
+const port = process.env.PORT || 5000;
 
 const params = { screen_name: 'voloyev', count: 3 };
-
+let tweets = null;
 // function rawurlencode(str) {
 //     return encodeURIComponent(str)
 //         .replace(/!/g, '%21')
@@ -39,34 +41,18 @@ client
         console.log('caught error', error.stack);
     })
     .then(result => {
+        tweets = result.data
         console.log('data', result.data);
     });
 
-// axios.defaults.headers.common[
-//     'Authorization'
-// ] = `Basic ${BASE64_BEARER_TOKEN_CREDENTIALS}`;
-// axios.defaults.headers.post['Content-Type'] =
-//     'application/x-www-form-urlencoded;charset=UTF-8';
-// axios
-//     .post(`/oauth2/${BASE64_BEARER_TOKEN_CREDENTIALS}`)
-//     .then(response => {
-//         console.log(response.data);
-//     })
-//     .catch(function(error) {
-//         if (error.response) {
-//             // The request was made and the server responded with a status code
-//             // that falls out of the range of 2xx
-//             console.log(error.response.data);
-//             console.log(error.response.status);
-//             console.log(error.response.headers);
-//         } else if (error.request) {
-//             // The request was made but no response was received
-//             // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
-//             // http.ClientRequest in node.js
-//             console.log(error.request);
-//         } else {
-//             // Something happened in setting up the request that triggered an Error
-//             console.log('Error', error.message);
-//         }
-//         console.log(error.config);
-//     });
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+app.get('/', (req, res) => {
+    res.send(tweets);
+});
+
+app.listen(port, () => console.log(`Listening on port ${port}`));

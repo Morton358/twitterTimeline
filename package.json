@@ -5,17 +5,21 @@
   "author": "Morton358 <vovankovalchuk358@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "babel-node --presets env app.js"
+    "start": "babel-node --presets env app.js",
+    "client": "cd client && yarn start",
+    "server": "nodemon app.js",
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
   },
   "dependencies": {
     "axios": "^0.18.0",
     "dotenv": "^5.0.1",
     "es6-promise": "^4.2.4",
-    "heroku-cli": "^6.16.7"
+    "express": "^4.16.3"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.1",
+    "concurrently": "^3.5.1",
     "rimraf": "^2.6.2",
     "twit": "^2.2.9"
   }
