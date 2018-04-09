@@ -9,9 +9,6 @@ class App extends Component {
         tweets: '',
         username: ''
     };
-    componentDidMount() {
-
-    }
 
     handleInputUsername = (event) => {
         console.log(event.target.value);
@@ -23,7 +20,7 @@ class App extends Component {
             const usr = this.state.username.slice(1);
             console.log(usr);
             axios
-                .get(`/${usr}`)
+                .get(`/timeline/${usr}`)
                 .then(response => {
                     console.log(response.data);
                     // this.setState({tweets: response.data});
