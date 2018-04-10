@@ -1,0 +1,10 @@
+.Header {
+    background-color: #222;
+    max-height: auto;
+    max-width:100%;
+}
+
+.HeaderImage {
+    max-height: 15%;
+    max-width:100%;
+}

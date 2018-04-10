@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import axios from './axios-instance';
+import { Button } from 'antd';
 
-import header from './assets/images/header-get-tweet.png';
-import './App.css';
+import axios from './axios-instance';
+import classes from './App.css';
+import Header from './components/Header/Header';
 
 class App extends Component {
     state = {
@@ -42,19 +43,9 @@ class App extends Component {
     };
 
     render() {
-        const style = {
-            backgroundImage: `url(${header})`
-        };
         return (
             <div className="App">
-                <header className="App-header">
-                    <img
-                        src={header}
-                        style={style}
-                        className="App-header__image"
-                        alt="logo"
-                    />
-                </header>
+                <Header />
                 <form className="App-form">
                     <div>
                         <label htmlFor="username">Write username: </label>
@@ -72,7 +63,9 @@ class App extends Component {
                         </p>
                     </div>
                     <div>
-                        <button onClick={this.handleSubmitForm}>Submit</button>
+                        <Button type="primary" onClick={this.handleSubmitForm}>
+                            Submit
+                        </Button>
                     </div>
                 </form>
                 <p className="App-intro">{this.state.response}</p>
