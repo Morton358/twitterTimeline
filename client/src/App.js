@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from './axios-instance';
 
-import logo from './logo.svg';
+import header from './assets/images/header-get-tweet.png';
 import './App.css';
 
 class App extends Component {
@@ -10,11 +10,11 @@ class App extends Component {
         username: ''
     };
 
-    handleInputUsername = (event) => {
+    handleInputUsername = event => {
         console.log(event.target.value);
-        this.setState({username: event.target.value})
-    }
-    handleSubmitForm = (event) => {
+        this.setState({ username: event.target.value });
+    };
+    handleSubmitForm = event => {
         event.preventDefault();
         if (this.state.username !== '') {
             const usr = this.state.username.slice(1);
@@ -39,15 +39,21 @@ class App extends Component {
         } else {
             console.log('Please write username');
         }
-
-    }
+    };
 
     render() {
+        const style = {
+            backgroundImage: `url(${header})`
+        };
         return (
             <div className="App">
                 <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo" />
-                    <h1 className="App-title">Welcome to React</h1>
+                    <img
+                        src={header}
+                        style={style}
+                        className="App-header__image"
+                        alt="logo"
+                    />
                 </header>
                 <form className="App-form">
                     <div>
@@ -61,8 +67,8 @@ class App extends Component {
                             onChange={this.handleInputUsername}
                         />
                         <p className="App-form__p">
-                            Usernames must be 1-15 characters in
-                            length, starting from '@' symbol
+                            Usernames must be 1-15 characters in length,
+                            starting from '@' symbol
                         </p>
                     </div>
                     <div>
