@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
-import { Button } from 'antd';
 
 import axios from './axios-instance';
 import classes from './App.css';
 import Header from './components/Header/Header';
+import UsernameForm from './components/UsernameForm/UsernameForm';
+import Tweets from './containers/Tweets/Tweets';
+import { CircularProgress } from 'material-ui/Progress';
+import Button from 'material-ui/Button';
 
 class App extends Component {
     state = {
         tweets: '',
-        username: ''
+        username: '',
+        loading: false
     };
 
     handleInputUsername = event => {
@@ -18,13 +22,14 @@ class App extends Component {
     handleSubmitForm = event => {
         event.preventDefault();
         if (this.state.username !== '') {
+            this.setState({ loading: true });
             const usr = this.state.username.slice(1);
             console.log(usr);
             axios
                 .get(`/timeline/${usr}`)
                 .then(response => {
-                    console.log(response.data);
-                    // this.setState({tweets: response.data});
+                    console.log(`[handleSubmitForm]: ${response.data}`);
+                    this.setState({ tweets: response.data, loading: false });
                 })
                 .catch(error => {
                     if (error.response) {
@@ -35,40 +40,78 @@ class App extends Component {
                     } else {
                         console.log('Error', error.message);
                     }
+                    this.setState({ loading: false });
                     console.log(error.config);
                 });
         } else {
-            console.log('Please write username');
+            console.log('[handleSubmitForm]: Please write username');
+        }
+    };
+    handleLoadMore = event => {
+        event.preventDefault();
+        if (this.state.username !== '') {
+            this.setState({ loading: true });
+            const usr = this.state.username.slice(1);
+            const tweets = [...this.state.tweets];
+            const lastTweet = { ...tweets[tweets.length - 1] };
+            const lastTweetId = lastTweet.id;
+            console.log(usr);
+            axios
+                .get(`/timeline/continueUsr${usr}/fromId${lastTweetId}`)
+                .then(response => {
+                    console.log(`[handleLoadMore]: ${response.data}`);
+                    const newTweets = response.data.filter(
+                        tw => tw.id !== lastTweetId
+                    );
+                    const allTweets = tweets.concat(newTweets);
+                    this.setState({ tweets: allTweets, loading: false });
+                })
+                .catch(error => {
+                    if (error.response) {
+                        console.log(error.response.data);
+                        console.log(error.response.status);
+                    } else if (error.request) {
+                        console.log(error.request);
+                    } else {
+                        console.log('Error', error.message);
+                    }
+                    this.setState({ loading: false });
+                    console.log(error.config);
+                });
+        } else {
+            console.log('[LoadMore]: Error with username');
         }
     };
 
     render() {
+        let tweetsData = null;
+        let loadMoreBtn = null;
+        if (this.state.tweets) {
+            tweetsData = <Tweets tweets={this.state.tweets} />;
+            loadMoreBtn = (
+                <Button
+                    color="primary"
+                    variant="raised"
+                    size="large"
+                    style={{ backgroundColor: '#4c91c7' }}
+                    onClick={this.handleLoadMore}
+                >
+                    Load More
+                </Button>
+            );
+        }
+        if (this.state.loading) {
+            loadMoreBtn = <CircularProgress size={50} />;
+        }
         return (
-            <div className="App">
+            <div className={classes.App}>
                 <Header />
-                <form className="App-form">
-                    <div>
-                        <label htmlFor="username">Write username: </label>
-                        <input
-                            className="App-form__input"
-                            type="text"
-                            required
-                            placeholder="@voloyev"
-                            pattern="^@?(\w){1,15}$"
-                            onChange={this.handleInputUsername}
-                        />
-                        <p className="App-form__p">
-                            Usernames must be 1-15 characters in length,
-                            starting from '@' symbol
-                        </p>
-                    </div>
-                    <div>
-                        <Button type="primary" onClick={this.handleSubmitForm}>
-                            Submit
-                        </Button>
-                    </div>
-                </form>
-                <p className="App-intro">{this.state.response}</p>
+                <UsernameForm
+                    inputHandler={event => this.handleInputUsername(event)}
+                    submitHandler={event => this.handleSubmitForm(event)}
+                />
+                {tweetsData}
+                {loadMoreBtn}
             </div>
         );
     }

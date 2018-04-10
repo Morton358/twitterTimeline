@@ -1,0 +1,12 @@
+.Form {
+    align-content: center;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    margin: 10% 20% 0 20%;
+}
+
+.Form__p {
+    color: #999;
+    font-size: 80%;
+}
