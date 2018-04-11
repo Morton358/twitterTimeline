@@ -1,10 +1,10 @@
 import React from 'react';
-
-import classes from './Tweet.css';
 import Card, { CardContent, CardHeader } from 'material-ui/Card';
 import Avatar from 'material-ui/Avatar';
 import Typography from 'material-ui/Typography';
-import TweeterIcon from '../../assets/images/Twitter_Social_Icon_Circle_White.svg';
+
+import classes from './Tweet.css';
+import TweeterIcon from '../../../assets/images/Twitter_Social_Icon_Circle_White.svg';
 
 
 const tweet = props => {

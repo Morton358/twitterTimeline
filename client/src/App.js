@@ -4,7 +4,7 @@ import axios from './axios-instance';
 import classes from './App.css';
 import Header from './components/Header/Header';
 import UsernameForm from './components/UsernameForm/UsernameForm';
-import Tweets from './containers/Tweets/Tweets';
+import Tweets from './components/Tweets/Tweets';
 import { CircularProgress } from 'material-ui/Progress';
 import Button from 'material-ui/Button';
 
@@ -16,7 +16,6 @@ class App extends Component {
     };
 
     handleInputUsername = event => {
-        console.log(event.target.value);
         this.setState({ username: event.target.value });
     };
     handleSubmitForm = event => {
@@ -28,7 +27,7 @@ class App extends Component {
             axios
                 .get(`/timeline/${usr}`)
                 .then(response => {
-                    console.log(`[handleSubmitForm]: ${response.data}`);
+                    // console.log(`[handleSubmitForm]: ${response.data}`);
                     this.setState({ tweets: response.data, loading: false });
                 })
                 .catch(error => {
@@ -55,11 +54,11 @@ class App extends Component {
             const tweets = [...this.state.tweets];
             const lastTweet = { ...tweets[tweets.length - 1] };
             const lastTweetId = lastTweet.id;
-            console.log(usr);
+            // console.log(usr);
             axios
                 .get(`/timeline/continueUsr${usr}/fromId${lastTweetId}`)
                 .then(response => {
-                    console.log(`[handleLoadMore]: ${response.data}`);
+                    // console.log(`[handleLoadMore]: ${response.data}`);
                     const newTweets = response.data.filter(
                         tw => tw.id !== lastTweetId
                     );
