@@ -87,7 +87,12 @@ class App extends Component {
         let tweetsData = null;
         let loadMoreBtn = null;
         if (this.state.tweets) {
-            tweetsData = <Tweets tweets={this.state.tweets} />;
+            tweetsData = (
+                <Tweets
+                    tweets={this.state.tweets}
+                    username={this.state.username}
+                />
+            );
             loadMoreBtn = (
                 <Button
                     color="primary"
