@@ -6,14 +6,14 @@ import TextField from 'material-ui/TextField';
 
 const usernameForm = props => {
     return (
-        <form className={classes.Form}>
+        <div className={classes.Form}>
             <div>
                 <TextField
                     required
+                    error={props.error}
                     id="name"
                     label="Your Username:"
                     placeholder="@voloyev"
-                    pattern="^@?(\w){1,15}$"
                     onChange={props.inputHandler}
                 />
                 <p className={classes.Form__p}>
@@ -23,6 +23,7 @@ const usernameForm = props => {
             </div>
             <div>
                 <Button
+                    disabled={props.disableBtn}
                     color="primary"
                     variant="raised"
                     size="small"
@@ -32,7 +33,7 @@ const usernameForm = props => {
                     Submit
                 </Button>
             </div>
-        </form>
+        </div>
     );
 };
 
