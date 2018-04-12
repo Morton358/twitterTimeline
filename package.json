@@ -6,12 +6,12 @@
   "license": "MIT",
   "scripts": {
     "babel-node": "babel-node --presets env app.js",
-    "client": "cd client && yarn start",
-    "server": "nodemon --exec yarn babel-node -- app.js",
-    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "client": "cd client && npm run start",
+    "server": "nodemon --exec npm run babel-node -- app.js",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "build": "babel src -d dist",
     "heroku-postbuild-client": "cd client/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
-    "heroku-start": "npm install && npm run heroku-podtbuild-client && npm run babel-node && npm run client"
+    "heroku-start": "npm install && cd client/ && npm install && cd .. && npm run dev"
   },
   "dependencies": {
     "axios": "^0.18.0",
