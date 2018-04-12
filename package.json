@@ -5,12 +5,10 @@
   "author": "Morton358 <vovankovalchuk358@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "babel-node": "babel-node --presets env app.js",
     "client": "cd client && yarn start",
-    "server": "nodemon --exec yarn babel-node",
+    "server": "nodemon --exec yarn babel-node --presets env app.js",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
     "build": "babel src -d dist",
-    "heroku-postbuild-client": "cd client/ && yarn && yarn build",
     "heroku-start": "yarn && cd client/ && yarn && cd .. && yarn dev"
   },
   "dependencies": {
