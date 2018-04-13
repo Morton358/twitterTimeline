@@ -5,16 +5,23 @@
   "author": "Morton358 <vovankovalchuk358@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "start": "yarn build && yarn serve",
+    "heroku-postbuild": "cd client && yarn && yarn build",
     "client": "cd client && yarn start",
-    "server": "nodemon --exec babel-node --presets env app.js",
+    "server": "nodemon --exec babel-node --presets env -- app.js",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
-    "build": "babel src -d dist",
-    "heroku-start": "yarn && cd client/ && yarn && cd .. && yarn dev"
+    "build": "babel ./ -d dist --presets env",
+    "serve": "node dist/app.js"
   },
+  "cacheDirectories": [
+      "node_modules",
+      "client/node_modules"
+  ],
   "dependencies": {
     "axios": "^0.18.0",
     "babel": "^6.23.0",
     "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "concurrently": "^3.5.1",
     "dotenv": "^5.0.1",

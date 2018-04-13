@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { CircularProgress } from 'material-ui/Progress';
 import Button from 'material-ui/Button';
+import axios from 'axios';
 
-import axios from './axios-instance';
 import classes from './App.css';
 import Header from './components/Header/Header';
 import UsernameForm from './components/UsernameForm/UsernameForm';

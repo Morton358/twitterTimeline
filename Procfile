@@ -1,1 +1,1 @@
-web: npm run heroku-start
+web: yarn heroku-postbuild && yarn start
