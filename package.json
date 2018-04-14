@@ -5,13 +5,14 @@
   "author": "Morton358 <vovankovalchuk358@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "yarn && yarn build && yarn serve",
+    "start": "yarn && yarn binary-start",
     "heroku-postbuild": "cd client && yarn && yarn build",
     "client": "cd client && yarn start",
     "server": "nodemon --exec babel-node --presets env -- app.js",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
     "build": "babel ./ -d dist --presets env",
-    "serve": "node dist/app.js"
+    "serve": "node dist/app.js",
+    "binary-start": "./node_modules/.bin/babel-node  app.js"
   },
   "cacheDirectories": [
       "node_modules",
