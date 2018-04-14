@@ -34,7 +34,11 @@ yarn dev in root folder
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
+At folder client/ run:
+
+```
+yarn test
+```
 
 ## Deployment
 
