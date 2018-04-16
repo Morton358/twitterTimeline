@@ -2,6 +2,8 @@
 
 Web-app that displays Twitter Timeline for given user.
 
+* [Demo](https://try-twitter-timeline.herokuapp.com/)
+
 ## Getting Started
 
 ##### Go to :
@@ -34,6 +36,11 @@ yarn dev in root folder
 
 ## Running the tests
 
+Tests was created with:
+
+* Jest
+* Enzyme
+
 At folder client/ run:
 
 ```
@@ -42,7 +49,9 @@ yarn test
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+You can check this project upon this link:
+
+* [Heroku](https://try-twitter-timeline.herokuapp.com/)
 
 ## Built With
 
@@ -51,6 +60,8 @@ Add additional notes about how to deploy this on a live system
 * Express JS
 * Twitt
 * Material-UI
+* Redux
+* Redux Saga
 
 ## Authors
 
