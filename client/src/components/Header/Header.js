@@ -13,7 +13,7 @@ const header = () => {
                 src={headerImage}
                 style={style}
                 className={classes.HeaderImage}
-                alt="logo"
+                role="photo"
             />
         </header>
     );

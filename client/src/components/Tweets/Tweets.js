@@ -4,18 +4,18 @@ import Tweet from './Tweet/Tweet';
 import classes from './Tweets.css';
 
 const tweets = (props) => {
-    const tweets = props.tweets.map(tw => {
+    const tweets_data = props.tweets.map(({id, text, created_at}) => {
         return (
-            <div key={tw.id}>
+            <div key={id}>
                 <Tweet
                     username={props.username}
-                    text={tw.text}
-                    data={tw.created_at}
+                    text={text}
+                    data={created_at}
                 />
             </div>
         );
     });
-    return <div className={classes.Tweets}>{tweets}</div>;
+    return <div className={classes.Tweets}>{tweets_data}</div>;
 };
 
 export default tweets;

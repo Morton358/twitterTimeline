@@ -48,7 +48,6 @@ class App extends Component {
                     if (response.data.errors) {
                         throw response.data.errors[0];
                     }
-                    // console.log(response.data);
                     this.setState({ tweets: response.data, loading: false });
                 })
                 .catch(error => {
@@ -68,14 +67,12 @@ class App extends Component {
             const tweets = [...this.state.tweets];
             const lastTweet = { ...tweets[tweets.length - 1] };
             const lastTweetId = lastTweet.id;
-            // console.log(usr);
             axios
                 .get(`/timeline/continueUsr${usr}/fromId${lastTweetId}`)
                 .then(response => {
                     if (response.data.errors) {
                         throw response.data.errors[0];
                     }
-                    // console.log(`[handleLoadMore]: ${response.data}`);
                     const newTweets = response.data.filter(
                         tw => tw.id !== lastTweetId
                     );
