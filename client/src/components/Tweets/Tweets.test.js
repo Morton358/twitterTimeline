@@ -7,7 +7,6 @@ import Tweet from './Tweet/Tweet';
 configure({ adapter: new Adapter() });
 
 describe('Tweets', () => {
-
     it('should render Tweet components according to count of tweets received from props', () => {
         const wrapper = shallow(
             <Tweets

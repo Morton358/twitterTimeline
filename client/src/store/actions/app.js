@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 import * as actionTypes from './actionTypes';
 
 export const getUserTweetsStart = () => {
@@ -23,20 +21,9 @@ export const getUserTweetsFailed = error => {
 };
 
 export const getUserTweets = username => {
-    return dispatch => {
-        dispatch(getUserTweetsStart());
-        const usr = username.slice(1);
-        axios
-            .get(`/timeline/${usr}`)
-            .then(response => {
-                if (response.data.errors) {
-                    throw response.data.errors[0];
-                }
-                dispatch(getUserTweetsSuccess(username, response.data));
-            })
-            .catch(error => {
-                dispatch(getUserTweetsFailed(error));
-            });
+    return {
+        type: actionTypes.GET_USER_TWEETS_INITIAL,
+        username: username
     };
 };
 
@@ -61,27 +48,10 @@ export const loadMoreTweetsFailed = (error) => {
 };
 
 export const loadMoreTweets = (username, tweets) => {
-    return dispatch => {
-        dispatch(loadMoreTweetsStart());
-        const tweetsData = [...tweets];
-        const lastTweet = { ...tweetsData[tweetsData.length - 1] };
-        const lastTweetId = lastTweet.id;
-        const usr = username.slice(1);
-        axios
-            .get(`/timeline/continueUsr${usr}/fromId${lastTweetId}`)
-            .then(response => {
-                if (response.data.errors) {
-                    throw response.data.errors[0];
-                }
-                const newTweets = response.data.filter(
-                    tw => tw.id !== lastTweetId
-                );
-                const allTweets = tweets.concat(newTweets);
-                dispatch(loadMoreTweetsSuccess(allTweets));
-            })
-            .catch(error => {
-                dispatch(loadMoreTweetsFailed(error));
-            });
+    return {
+        type: actionTypes.LOAD_MORE_TWEETS_INITIAL,
+        username: username,
+        tweets: tweets
     };
 };
 

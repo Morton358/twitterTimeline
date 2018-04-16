@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { CircularProgress } from 'material-ui/Progress';
 import Button from 'material-ui/Button';
 import { connect } from 'react-redux';
+import ScrollToTop from 'react-scroll-up';
 
 import classes from './App.css';
 import Header from './components/Header/Header';
@@ -9,9 +10,10 @@ import UsernameForm from './components/UsernameForm/UsernameForm';
 import Tweets from './components/Tweets/Tweets';
 import ModalError from './components/ModalError/ModalError';
 import { checkValidityInput } from './share/utility';
+import scrollUpIcon from './assets/images/scroll_up_icon_white.svg';
 import * as actions from './store/actions/index';
 
-class App extends Component {
+export class App extends Component {
     state = {
         username: '',
         inputValid: true,
@@ -44,6 +46,7 @@ class App extends Component {
         let tweetsData = null;
         let loadMoreBtn = null;
         let modalError = null;
+        let scrollUpBtn = null;
         if (this.props.tweets) {
             tweetsData = (
                 <Tweets
@@ -61,6 +64,15 @@ class App extends Component {
                 >
                     Load More
                 </Button>
+            );
+            scrollUpBtn = (
+                <ScrollToTop showUnder={160}>
+                    <img
+                        src={scrollUpIcon}
+                        className={classes.ScrollUpBtn}
+                        alt="icon"
+                    />
+                </ScrollToTop>
             );
         }
         if (this.props.loading) {
@@ -90,6 +102,7 @@ class App extends Component {
                 />
                 {tweetsData}
                 {loadMoreBtn}
+                {scrollUpBtn}
             </div>
         );
     }
@@ -108,7 +121,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onGetUserTweets: username => dispatch(actions.getUserTweets(username)),
-        onLoadMoreTweets: (username, tweets) => dispatch(actions.loadMoreTweets(username, tweets)),
+        onLoadMoreTweets: (username, tweets) =>
+            dispatch(actions.loadMoreTweets(username, tweets)),
         onResetError: () => dispatch(actions.resetError())
     };
 };
