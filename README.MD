@@ -49,10 +49,12 @@ yarn test
 
 ## Deployment
 
-You can check this project upon this link:
+You can prepare and deploy project in Heroku with this commands:
 
-* [Heroku](https://try-twitter-timeline.herokuapp.com/)
+```
+yarn heroku-postbuild && yarn start
 
+```
 ## Built With
 
 * NodeJS
