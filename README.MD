@@ -2,7 +2,7 @@
 
 Web-app that displays Twitter Timeline for given user.
 
-* [Demo](https://try-twitter-timeline.herokuapp.com/)
+* [Demo](https://safe-wave-38910.herokuapp.com/)
 
 ## Getting Started
 
